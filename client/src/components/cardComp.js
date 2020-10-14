@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 
 export default function VacCard({vacation}) {
   const classes = useStyles();
-   const {picture,description} = vacation
+   const {picture,description,price,dates} = vacation
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -30,12 +30,15 @@ export default function VacCard({vacation}) {
           image={picture}
           title="Contemplative Reptile"
         />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            HADAR
+        <CardContent >
+          <Typography gutterBottom variant="h5" component="h2" >
+            {description}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {description}
+            {price}
+          </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+            {dates}
           </Typography>
         </CardContent>
       </CardActionArea>

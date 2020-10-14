@@ -1,23 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const {badRequestHandler} = require('../utils');
-const FETCH_VACATIONS = 'SELECT * FROM `vacations`'
-const FETCH_USER_VACATIONS = 'SELECT FROM vacations RIGHT JOIN users_vacations ON vacations.id = users_vacations.vacation_id where users_vacations.user_id=?'
-const FETCH_REST_VACATIONS = 'SELECT vacations FROM vacations RIGHT JOIN users_vacations ON vacations.id = users_vacations.vacation_id where users_vacations.user_id=?'
-
-const fetchCations = (x) => global.mysqlConnection.execute(FETCH_VACATIONS, [x]);
+const FETCH_USER_VACATIONS = 'SELECT * FROM users_vacations where user_id = ?'
+const fetchIds = (x) => global.mysqlConnection.execute(FETCH_USER_VACATIONS, [x]);
 
 router.get('/', async (req, res) => {
     try {
         const {id} = req.user;
-        const [rows] = await fetchCations(id);
-        return res.json(rows);
+        const [followed] = await fetchIds(id);
+        const update = followed.map(x=>x.vacation_id)
+        const [usersVacations] = await global.mysqlConnection.execute(`SELECT * FROM vacations WHERE id IN (${update.toString()});`, []);
+        const [restVacations] = await global.mysqlConnection.execute(`SELECT * FROM vacations WHERE NOT id IN (${update.toString()})`, []);
+        return res.json(usersVacations.concat(restVacations));
     } catch(err) {
-        return badRequestHandler();
+        return badRequestHandler(res);
     }
 });
-
-
 
 //router.get('/', async (req, res) => {
 //    try {
@@ -28,9 +26,6 @@ router.get('/', async (req, res) => {
 //        return badRequestHandler();
 //    }
 //});
-
-
-
 
 
 module.exports = router;

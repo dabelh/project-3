@@ -14,13 +14,13 @@ import Grid from '@material-ui/core/Grid';
 import {asyncActionFetchCations} from '../actions/vacationAction'
 
 class vacationsView extends React.Component {
-
     
   render(){ 
+     
   return (
         <React.Fragment>
       <CssBaseline />
-    <Container fixed>
+    <Container fixed style={{ backgroundColor: '#b0bec5'}}>
       <div >
         <Grid container spacing={3}>
        <Grid item xs={12}>

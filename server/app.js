@@ -48,9 +48,9 @@ mysql.createConnection({
       })
     ;
   })
-app.use('/auth,', loginController);
-app.use('*', isValid);
+app.use('/auth', loginController);
 app.use('/vacations', VacationsController);
+//app.use('*', isValid);
 
 process.on('uncaughtException', (err, origin) => {
     console.log(err);
