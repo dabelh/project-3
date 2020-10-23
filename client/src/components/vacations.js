@@ -13,23 +13,15 @@ import VacCard from './cardComp';
 import Grid from '@material-ui/core/Grid';
 import {asyncActionFetchCations} from '../actions/vacationAction'
 
-class vacationsView extends React.Component {
+class VacationsView extends React.Component {
     
   render(){ 
      
   return (
         <React.Fragment>
-      <CssBaseline />
-    <Container fixed style={{ backgroundColor: '#b0bec5'}}>
-      <div >
         <Grid container spacing={3}>
-       <Grid item xs={12}>
-          <Paper>NAME</Paper>
-        </Grid>
       {this.renderVacationCard()}
       </Grid>
-    </div>
-      </Container>
     </React.Fragment>
   
   );
@@ -71,5 +63,5 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(vacationsView);
-
+const Connected = connect(mapStateToProps, mapDispatchToProps)(VacationsView);
+export default Connected;

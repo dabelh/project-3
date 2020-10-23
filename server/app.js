@@ -9,7 +9,6 @@ const {dbConfig, cookieConfig} = require('./config');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const {localStrategyHandler, serializeUser, deserializeUser, isValid} = require('./passport');
-const tasksController = require('./controllers/tasks-controller');
 const mysql = require('mysql2/promise');
 const PORT = process.env.PORT || 4000;
 const path = require('path');

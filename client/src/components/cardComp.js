@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import SaveIcon from '@material-ui/icons/Save';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 
 const useStyles = makeStyles({
@@ -19,9 +20,17 @@ const useStyles = makeStyles({
   },
 });
 
+
+
+//const createButton =()=> {
+//      return <FavoriteBorderIcon onClick={()=>alert('hello')}/>
+//
+//};
+
 export default function VacCard({vacation}) {
-  const classes = useStyles();
-   const {picture,description,price,dates} = vacation
+ 
+ const classes = useStyles();
+   const {picture,description,price,dates,id} = vacation
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -43,16 +52,10 @@ export default function VacCard({vacation}) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-      <Button
-        variant="contained"
-        color="primary"
-        size="small"
-        className={classes.button}
-        startIcon={<SaveIcon />}
-      >
-        Save
-      </Button>
+      <FavoriteBorderIcon onClick={()=>alert(id)}/>
       </CardActions>
     </Card>
   );
 }
+
+

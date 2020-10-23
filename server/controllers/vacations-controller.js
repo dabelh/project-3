@@ -4,6 +4,17 @@ const {badRequestHandler} = require('../utils');
 const FETCH_USER_VACATIONS = 'SELECT * FROM users_vacations where user_id = ?'
 const fetchIds = (x) => global.mysqlConnection.execute(FETCH_USER_VACATIONS, [x]);
 
+router.get('/user', async (req, res) => {
+    try {
+        const userData = req.user;
+        return res.json(userData);
+    } catch(err) {
+        return badRequestHandler(res);
+    }
+});
+
+
+
 router.get('/', async (req, res) => {
     try {
         const {id} = req.user;

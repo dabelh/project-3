@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import login from './components/login';
 import signup from './components/signup';
-import vacations from './components/vacations';
+import VacApp from './components/vacations-app';
 
 
 import { Provider } from 'react-redux';
@@ -35,7 +35,7 @@ function App() {
                 <Switch>
                     <Route path='/login' component={login}/>
                     <Route path='/signup' component={signup}/>
-                    <Route path='/vacations' component={vacations}/>
+                    <Route path='/vacations' component={VacApp}/>
                 </Switch>
             </Router>
         </div>
