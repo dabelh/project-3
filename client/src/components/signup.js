@@ -35,6 +35,8 @@ export default class SignUp extends React.Component {
                 <TextField id="password" type="password" label="password" onChange={({target: {value}}) => this.onChange('password', value)} />
                 <TextField id="password2" type="password" label=" repet password" onChange={({target: {value}}) => this.onChange('password2', value)} />
                 <Button onClick={() => this.onClick()} variant="contained" color="primary">Sigh Up</Button>
+                <br/>
+                <Button onClick={() => this.props.history.push("/login")} variant="outlined" color="primary">Log In</Button> 
             </div>
         )
     }

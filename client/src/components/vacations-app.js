@@ -5,36 +5,35 @@ import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
+import { connect } from 'react-redux';
+import {userAction} from '../actions/userAction';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
 
 
-export default class VacApp extends React.Component {
+class VacApp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             username:'',
-            isAdmin:null
+            isAdmin:0
+
         }
     }
 
 async componentDidMount() {
     try {
       await fetch(`/vacations/user`).then(response => response.json()).then(data => {
-        const {username,isAdmin} = data
+        console.log(data);
+        const {username,isAdmin,id} = data
+        this.props.userUpdate({isAdmin,id})
         this.setState({username})
-          if(isAdmin==1){
-              this.setState({isAdmin:true})
-          }
-          else{
-              this.setState({isAdmin:false})
-          }
-         console.log(this.state);
+        this.setState({isAdmin})
 
         });
 }
-
     
     catch(err) {
-        console.log('bassaa')
+        this.props.history.push("/login")
     }
 }
 
@@ -43,8 +42,9 @@ async componentDidMount() {
             <Fragment>
     <CssBaseline />
     <Container fixed style={{ backgroundColor: '#b0bec5'}}>
+        {this.state.isAdmin && <EqualizerIcon onClick={()=>{this.props.history.push("/stats")}}style={{ float: 'left'}}fontSize="large"/>}
      <Grid item xs={12}>
-            <Typography variant="h4">{this.state.username}</Typography>
+            <Typography variant="h4">Hi {this.state.username}</Typography>
         </Grid>
       <div>
             <VacationsView/>
@@ -56,3 +56,12 @@ async componentDidMount() {
         )
     }
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        userUpdate: value => {
+            return dispatch(userAction(value));
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(VacApp);

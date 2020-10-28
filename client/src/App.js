@@ -10,6 +10,7 @@ import {
 import login from './components/login';
 import signup from './components/signup';
 import VacApp from './components/vacations-app';
+import VacStats from './components/vacationStats';
 
 
 import { Provider } from 'react-redux';
@@ -36,6 +37,7 @@ function App() {
                     <Route path='/login' component={login}/>
                     <Route path='/signup' component={signup}/>
                     <Route path='/vacations' component={VacApp}/>
+                    <Route path='/stats' component={VacStats}/>
                 </Switch>
             </Router>
         </div>
